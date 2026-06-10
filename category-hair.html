@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sephora | Hair</title>
+    <meta name="description" content="Sephora redesign, Hair category." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,300;0,400;0,500;1,300;1,400&family=Open+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/components.css" />
+  </head>
+  <body>
+    <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress__bar" data-scroll-progress></span></div>
+    <div class="cursor-ring" data-cursor aria-hidden="true"></div>
+
+    <header class="site-header site-header--shop" data-site-header>
+      <div class="site-header__bar">
+        <div class="site-header__start">
+          <button type="button" class="site-header__menu" data-menu-toggle aria-expanded="false" aria-controls="overlay-menu" aria-label="Open menu">
+            <img src="mark.svg" alt="" class="site-header__mark" width="22" height="22" decoding="async" aria-hidden="true" />
+          </button>
+        </div>
+        <a class="site-header__logo" href="index.html" aria-label="Sephora home">
+          <img src="Logo.svg" alt="" width="132" height="11" decoding="async" />
+        </a>
+        <div class="site-header__end" aria-hidden="true"></div>
+      </div>
+    </header>
+
+    <aside class="overlay-menu" id="overlay-menu" data-overlay-menu aria-label="Full screen menu" aria-hidden="true">
+      <div class="overlay-menu__bg" data-close-menu></div>
+      <div class="overlay-menu__inner container">
+        <div class="overlay-menu__top">
+          <button type="button" class="site-header__menu is-active" data-menu-toggle aria-label="Close menu">
+            <img src="mark.svg" alt="" class="site-header__mark" width="22" height="22" aria-hidden="true" />
+            <span class="site-header__menu-label">Close</span>
+          </button>
+        </div>
+        <nav class="overlay-menu__nav" aria-label="Primary overlay navigation">
+          <a href="index.html">Home</a>
+          <a href="category-makeup.html">Makeup</a>
+          <a href="category-skincare.html">Skincare</a>
+          <a href="category-hair.html" aria-current="page">Hair</a>
+          <a href="category-tools.html">Tools</a>
+          <a href="category-fragrance.html">Fragrance</a>
+        </nav>
+        <div class="overlay-menu__foot">
+          <span>We belong to something beautiful</span>
+        </div>
+      </div>
+    </aside>
+
+    <main>
+      <section class="page-lead">
+        <div class="page-lead__media" aria-hidden="true">
+          <img src="assets/hero-hair.jpg" alt="" width="1920" height="1080" />
+        </div>
+        <div class="container page-lead__content">
+          <h1 class="reveal">Hair, <em>designed.</em></h1>
+          <p class="reveal reveal--delay-2">
+            Performance-driven formulas for repair, shape, hold, and luminous movement.
+          </p>
+        </div>
+      </section>
+
+      <section class="editorial surface-ivory">
+        <div class="container">
+        <div class="cards-rail">
+          <article class="reveal">
+            <div class="cards-rail__visual">
+              <img src="assets/card-wash.png" alt="Hair wash and shampoo products" width="520" height="360" loading="lazy" />
+            </div>
+            <h3>Wash</h3>
+            <p>Targeted cleansers for scalp and strand.</p>
+          </article>
+          <article class="reveal reveal--delay-1">
+            <div class="cards-rail__visual">
+              <img src="assets/card-treat.png" alt="Hair treatment and repair products" width="520" height="360" loading="lazy" />
+            </div>
+            <h3>Treat</h3>
+            <p>Bond support and recovery concentrates.</p>
+          </article>
+          <article class="reveal reveal--delay-2">
+            <div class="cards-rail__visual">
+              <img src="assets/card-style.png" alt="Hair styling creams and tools" width="520" height="360" loading="lazy" />
+            </div>
+            <h3>Style</h3>
+            <p>Shape memory creams and modern texture tools.</p>
+          </article>
+          <article class="reveal reveal--delay-3">
+            <div class="cards-rail__visual">
+              <img src="assets/card-finish.png" alt="Hair finishing sprays and hold products" width="520" height="360" loading="lazy" />
+            </div>
+            <h3>Finish</h3>
+            <p>Weightless hold with humidity defense.</p>
+          </article>
+        </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer surface-ivory">
+      <div class="container footer__inner">
+        <div class="footer__brand"><img src="Logo.svg" alt="Sephora" class="footer__brand-img" /></div>
+        <div class="footer__meta">
+          <span>Free shipping on orders $100+</span>
+          <span>Beauty Insider rewards</span>
+          <span>&copy; 2026 Sephora USA, Inc.</span>
+        </div>
+      </div>
+    </footer>
+    <script src="scripts/main.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sephora Collection | The Gradient Edit | Makeup Rebrand</title>
+    <meta
+      name="description"
+      content="Meet The Gradient Edit: five new Sephora Collection essentials with frosted glass packaging, pro-level formulas, and shades for every skin tone."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,300;0,400;0,500;1,300;1,400&family=Open+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/components.css" />
+    <style>
+      /* ============================================================
+         SHADE ATLAS : 48 swatches, hover to reveal the name
+         ============================================================ */
+      .x-atlas {
+        background: var(--ink);
+        color: var(--ivory);
+        padding: var(--space-2xl) 0;
+        position: relative;
+        overflow: hidden;
+      }
+      .x-atlas::before {
+        content: none;
+      }
+      .x-atlas__readout {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.9rem 0;
+        margin-bottom: var(--space-md);
+        font-family: var(--font-display);
+        font-size: 0.78rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+      .x-atlas__readout-name {
+        font-family: var(--font-display);
+        font-style: italic;
+        font-size: 1.6rem;
+        letter-spacing: 0;
+        text-transform: none;
+        color: var(--ivory);
+        transition: color 240ms var(--ease-out);
+      }
+      .x-atlas__readout-meta {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.2rem;
+        text-align: right;
+      }
+      .x-atlas__readout-code {
+        color: var(--red);
+        font-size: 0.85rem;
+        letter-spacing: 0.14em;
+      }
+      .x-atlas__readout-und {
+        color: var(--ivory-dim);
+        font-size: 0.72rem;
+      }
+      .x-atlas__grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 6px;
+      }
+      @media (max-width: 900px) { .x-atlas__grid { grid-template-columns: repeat(8, 1fr); } }
+      @media (max-width: 560px) { .x-atlas__grid { grid-template-columns: repeat(6, 1fr); } }
+      .x-swatch {
+        aspect-ratio: 1 / 1.15;
+        position: relative;
+        cursor: crosshair;
+        background: var(--c);
+        transition: transform 360ms var(--ease-out), filter 360ms var(--ease-out);
+        will-change: transform;
+        border: 1.5px solid rgba(255, 255, 255, 0.22);
+      }
+      .x-swatch::after {
+        content: attr(data-code);
+        position: absolute;
+        inset: auto 0 0 0;
+        padding: 4px 6px;
+        font-family: var(--font-display);
+        font-size: 0.58rem;
+        letter-spacing: 0.16em;
+        color: rgba(0,0,0,0.65);
+        opacity: 0;
+        transition: opacity 220ms var(--ease-out), color 240ms var(--ease-out);
+      }
+      .x-swatch:hover,
+      .x-swatch:focus-visible {
+        transform: scale(1.18);
+        z-index: 2;
+        filter: brightness(0.96) contrast(1.08);
+        outline: none;
+      }
+      .x-swatch:hover::after,
+      .x-swatch:focus-visible::after {
+        opacity: 1;
+        color: var(--red);
+      }
+      .x-atlas__foot {
+        margin-top: var(--space-md);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        font-family: var(--font-display);
+        font-size: 0.72rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--ivory-dim);
+        opacity: 1;
+      }
+      .x-atlas__jump {
+        appearance: none;
+        background: var(--red);
+        border: 0;
+        color: var(--ivory);
+        font: inherit;
+        letter-spacing: 0.2em;
+        padding: 0.55rem 1rem;
+        border-radius: 999px;
+        cursor: pointer;
+        opacity: 1;
+        transition: transform 240ms var(--ease-out), background 240ms var(--ease-out);
+      }
+      .x-atlas__jump:hover { transform: translateY(-2px); background: var(--red-deep); }
+      .x-swatch.is-selected {
+        outline: 2px solid var(--red);
+        outline-offset: 3px;
+        transform: scale(1.12);
+        z-index: 3;
+      }
+    </style>
+  </head>
+  <body class="page-makeup">
+    <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress__bar" data-scroll-progress></span></div>
+    <div class="cursor-ring" data-cursor aria-hidden="true"></div>
+
+    <header class="site-header site-header--shop" data-site-header>
+      <div class="site-header__bar">
+        <div class="site-header__start">
+          <button type="button" class="site-header__menu" data-menu-toggle aria-expanded="false" aria-controls="overlay-menu" aria-label="Open menu">
+            <img src="mark.svg" alt="" class="site-header__mark" width="22" height="22" decoding="async" aria-hidden="true" />
+          </button>
+        </div>
+        <a class="site-header__logo" href="index.html" aria-label="Sephora home">
+          <img src="Logo.svg" alt="" width="132" height="11" decoding="async" />
+        </a>
+        <div class="site-header__end" aria-hidden="true"></div>
+      </div>
+    </header>
+
+    <aside class="overlay-menu" id="overlay-menu" data-overlay-menu aria-label="Full screen menu" aria-hidden="true">
+      <div class="overlay-menu__bg" data-close-menu></div>
+      <div class="overlay-menu__inner container">
+        <div class="overlay-menu__top">
+          <button type="button" class="site-header__menu is-active" data-menu-toggle aria-label="Close menu">
+            <img src="mark.svg" alt="" class="site-header__mark" width="22" height="22" aria-hidden="true" />
+            <span class="site-header__menu-label">Close</span>
+          </button>
+        </div>
+        <nav class="overlay-menu__nav" aria-label="Primary overlay navigation">
+          <a href="index.html">Home</a>
+          <a href="category-makeup.html" aria-current="page">Makeup</a>
+          <a href="category-skincare.html">Skincare</a>
+          <a href="category-hair.html">Hair</a>
+          <a href="category-tools.html">Tools</a>
+          <a href="category-fragrance.html">Fragrance</a>
+        </nav>
+        <div class="overlay-menu__foot">
+          <span>We belong to something beautiful</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="makeup-page">
+      <section class="makeup-hero" aria-label="Makeup">
+        <div class="makeup-hero__media">
+          <img
+            src="assets/hero-makeup.png"
+            alt="Model applying cream blush against a red backdrop with dramatic light and shadow"
+            width="819"
+            height="1024"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </div>
+        <div class="container makeup-hero__content">
+          <h1 class="makeup-hero__title">Makeup</h1>
+          <p class="makeup-hero__quote">"BEAUTY BEGINS THE MOMENT YOU CREATE IT."</p>
+        </div>
+      </section>
+
+      <a class="makeup-banner" href="collection-launch.html">
+        <div class="makeup-banner__media" aria-hidden="true">
+          <img src="assets/makeup-collection-banner.png" alt="" width="1024" height="676" loading="lazy" />
+        </div>
+        <span class="makeup-banner__overlay" aria-hidden="true"></span>
+        <span class="makeup-banner__content">
+          <span class="makeup-banner__copy">
+            <span class="makeup-banner__text">See our new collection</span>
+            <span class="makeup-banner__subcopy">
+              <span>Beauty redefined</span>
+              <span>Shop Sephora's new range</span>
+            </span>
+          </span>
+          <span class="makeup-banner__arrow" aria-hidden="true"></span>
+        </span>
+      </a>
+
+      <section class="makeup-shop" id="shop-collection" data-makeup-shop>
+        <div class="container">
+          <nav class="makeup-zones" role="tablist" aria-label="Shop by face area">
+            <button type="button" class="makeup-zones__tab is-active" role="tab" aria-selected="true" data-zone-filter="face">Face</button>
+            <button type="button" class="makeup-zones__tab" role="tab" aria-selected="false" data-zone-filter="eyes">Eyes</button>
+            <button type="button" class="makeup-zones__tab" role="tab" aria-selected="false" data-zone-filter="lips">Lips</button>
+          </nav>
+
+          <div class="makeup-shop__layout makeup-shop__layout--with-filters">
+            <p class="makeup-shop__filters-label" data-face-filters>Filter</p>
+            <nav class="makeup-shop__filters-nav" data-face-filters aria-label="Product category">
+              <button type="button" class="is-active" data-category-filter="all">All</button>
+              <button type="button" data-category-filter="foundation">Foundation</button>
+              <button type="button" data-category-filter="concealer">Concealer</button>
+              <button type="button" data-category-filter="blush">Blush</button>
+              <button type="button" data-category-filter="contour">Contour</button>
+              <button type="button" data-category-filter="bronzer">Bronzer</button>
+              <button type="button" data-category-filter="setting-powder">Setting powder</button>
+            </nav>
+
+            <div class="makeup-shop__products">
+              <p class="makeup-shop__empty" data-shop-empty hidden>
+                No products for this area yet.
+                <a href="index.html#new-and-hot">Browse New &amp; Hot</a>.
+              </p>
+
+              <p class="makeup-shop__filter-empty" data-filter-empty hidden>
+                No products in this category.
+                <button type="button" data-category-filter="all">View all</button>.
+              </p>
+
+              <div class="makeup-shop__grid">
+            <a class="product-card reveal" href="products/fenty-pro-filtr-foundation.html" data-face-zone="face" data-brand="Fenty Beauty" data-subcategory="Foundation" data-price-value="64">
+              <div class="product-card__media">
+                <img src="assets/face-picks/fenty-pro-filtr-foundation.png" alt="Fenty Beauty Pro Filt'r Soft Matte Longwear Foundation" width="1000" height="1000" loading="lazy" />
+              </div>
+              <div class="product-card__body">
+                <span class="product-card__brand">Fenty Beauty</span>
+                <h3 class="product-card__title">Pro Filt'r Soft Matte Foundation</h3>
+                <p class="product-card__desc">Medium to full coverage with a pore-diffused matte finish. 50 shades.</p>
+                <div class="product-card__meta">
+                  <span class="product-card__price">$64.00</span>
+                  <span class="product-card__rating">★ 4.2</span>
+                </div>
+              </div>
+            </a>
+
+            <a class="product-card reveal reveal--delay-1" href="products/estee-double-wear-foundation.html" data-face-zone="face" data-brand="Estée Lauder" data-subcategory="Foundation" data-price-value="83">
+              <div class="product-card__media">
+                <img src="assets/face-picks/estee-double-wear-foundation.png" alt="Estée Lauder Double Wear Stay-In-Place Foundation" width="1000" height="1000" loading="lazy" />
+              </div>
+              <div class="product-card__body">
+                <span class="product-card__brand">Estée Lauder</span>
+                <h3 class="product-card__title">Double Wear Foundation</h3>
+                <p class="product-card__desc">24-hour wear with a natural matte finish that stays colour-true.</p>
+                <div class="product-card__meta">
+                  <span class="product-card__price">$83.00</span>
+                  <span class="product-card__rating">★ 4.7</span>
+                </div>
+              </div>
+            </a>
+
+            <a class="product-card reveal reveal--delay-2" href="products/tarte-shape-tape-concealer.html" data-face-zone="face" data-brand="tarte" data-subcategory="Concealer" data-price-value="53">
+              <div class="product-card__media">
+                <img src="assets/face-picks/tarte-shape-tape-concealer.png" alt="tarte Shape Tape Concealer" width="1000" height="1000" loading="lazy" />
+              </div>
+              <div class="product-card__body">
+                <span class="product-card__brand">tarte</span>
+                <h3 class="product-card__title">Shape Tape Concealer</h3>
+                <p class="product-card__desc">Full-coverage matte concealer that brightens and lifts for 16 hours.</p>
+                <div class="product-card__meta">
+                  <span class="product-card__price">$53.00</span>
+                  <span class="product-card__rating">★ 4.6</span>
+                </div>
+              </div>
+            </a>
+
+            <a class="product-card reveal reveal--delay-3" href="products/natasha-denona-hy-glam-concealer.html" data-face-zone="face" data-brand="Natasha Denona" data-subcategory="Concealer" data-price-value="55">
+              <div class="product-card__media">
+                <img src="assets/face-picks/natasha-denona-hy-glam-concealer.png" alt="Natasha Denona HY-Glam Concealer" width="1000" height="1000" loading="lazy" />
+              </div>
+              <div class="product-card__body">
+                <span class="product-card__brand">Natasha Denona</span>
+                <h3 class="product-card__title">HY-Glam Concealer</h3>
+                <p class="product-card__desc">Ultra-fluid, high-pigment concealer with a flawless matte finish.</p>
+                <div class="product-card__meta">
+                  <span class="product-card__price">$55.00</span>
+                  <span class="product-card__rating">★ 4.5</span>
+                </div>
+              </div>
+            </a>
+
+            <a class="product-card reveal" href="products/rare-beauty-soft-pinch-blush.html" data-face-zone="face" data-brand="Rare Beauty" data-subcategory="Blush" data-price-value="45">
+              <div class="product-card__media">
+                <img src="assets/face-picks/rare-beauty-soft-pinch-blush.png" alt="Rare Beauty Soft Pinch Liquid Blush" width="1000" height="1000" loading="lazy" />
+              </div>
+              <div class="product-card__body">
+                <span class="product-card__brand">Rare Beauty</span>
+                <h3 class="product-card__title">Soft Pinch Liquid Blush</h3>
+                <p class="product-card__desc">Weightless liquid blush with buildable colour for up to 12 hours.</p>
+                <div class="product-card__meta">
+                  <span class="product-card__price">$45.00</span>
+                  <span class="product-card__rating">★ 4.8</span>
+                </div>
+              </div>
+            </a>
+
+            <a class="product-card reveal reveal--delay-1" href="products/rare-beauty-soft-pinch-contour.html" data-face-zone="face" data-brand="Rare Beauty" data-subcategory="Contour" data-price-value="50">
+              <div class="product-card__media">
+                <img src="assets/face-picks/rare-beauty-soft-pinch-contour.png" alt="Rare Beauty Soft Pinch Liquid Contour" width="1000" height="1000" loading="lazy" />
+              </div>
+              <div class="product-card__body">
+                <span class="product-card__brand">Rare Beauty</span>
+                <h3 class="product-card__title">Soft Pinch Liquid Contour</h3>
+                <p class="product-card__desc">Blendable liquid contour for a naturally lifted, sculpted look.</p>
+                <div class="product-card__meta">
+                  <span class="product-card__price">$50.00</span>
+                  <span class="product-card__rating">★ 4.6</span>
+                </div>
+              </div>
+            </a>
+
+            <a class="product-card reveal reveal--delay-2" href="products/makeup-by-mario-soft-sculpt-bronzer.html" data-face-zone="face" data-brand="Makeup By Mario" data-subcategory="Bronzer" data-price-value="63">
+              <div class="product-card__media">
+                <img src="assets/face-picks/makeup-by-mario-soft-sculpt-bronzer.png" alt="Makeup By Mario Soft Sculpt Bronzer" width="1000" height="1000" loading="lazy" />
+              </div>
+              <div class="product-card__body">
+                <span class="product-card__brand">Makeup By Mario</span>
+                <h3 class="product-card__title">Soft Sculpt Bronzer</h3>
+                <p class="product-card__desc">Pressed bronzer with neutral shades for warmth and soft definition.</p>
+                <div class="product-card__meta">
+                  <span class="product-card__price">$63.00</span>
+                  <span class="product-card__rating">★ 4.5</span>
+                </div>
+              </div>
+            </a>
+
+            <a class="product-card reveal reveal--delay-3" href="products/huda-easy-bake-powder.html" data-face-zone="face" data-brand="Huda Beauty" data-subcategory="Setting powder" data-price-value="70">
+              <div class="product-card__media">
+                <img src="assets/face-picks/huda-easy-bake-powder.png" alt="Huda Beauty Easy Bake Loose Powder" width="1000" height="1000" loading="lazy" />
+              </div>
+              <div class="product-card__body">
+                <span class="product-card__brand">Huda Beauty</span>
+                <h3 class="product-card__title">Easy Bake Loose Powder</h3>
+                <p class="product-card__desc">Loose setting powder that blurs, bakes, and keeps shine at bay.</p>
+                <div class="product-card__meta">
+                  <span class="product-card__price">$70.00</span>
+                  <span class="product-card__rating">★ 4.8</span>
+                </div>
+              </div>
+            </a>
+
+            <a class="product-card reveal" href="products/one-size-ultimate-setting-powder.html" data-face-zone="face" data-brand="ONE/SIZE" data-subcategory="Setting powder" data-price-value="60">
+              <div class="product-card__media">
+                <img src="assets/face-picks/one-size-ultimate-setting-powder.png" alt="ONE/SIZE Ultimate Setting Powder" width="1000" height="1000" loading="lazy" />
+              </div>
+              <div class="product-card__body">
+                <span class="product-card__brand">ONE/SIZE</span>
+                <h3 class="product-card__title">Ultimate Setting Powder</h3>
+                <p class="product-card__desc">Blurring loose powder with 24-hour shine control and no flashback.</p>
+                <div class="product-card__meta">
+                  <span class="product-card__price">$60.00</span>
+                  <span class="product-card__rating">★ 4.3</span>
+                </div>
+              </div>
+            </a>
+
+            <a class="product-card reveal" href="products/dewy-lip-cheek-tint.html" data-face-zone="lips" data-brand="Sephora Collection" data-subcategory="Lip & cheek tint" data-price-value="16">
+              <div class="product-card__media">
+                <img src="assets/sephora-collection/dewy-lip-cheek-tint.png" alt="Sephora Collection All-In-One Cream Color Blush" width="1000" height="1000" loading="lazy" />
+              </div>
+              <div class="product-card__body">
+                <span class="product-card__brand">Sephora Collection</span>
+                <h3 class="product-card__title">Dewy Lip &amp; Cheek Tint</h3>
+                <p class="product-card__desc">Sheer, buildable wash of color with a fresh, dewy finish.</p>
+                <div class="product-card__meta">
+                  <span class="product-card__price">$16.00</span>
+                  <span class="product-card__rating">★ 4.9</span>
+                </div>
+              </div>
+            </a>
+
+            <a class="product-card product-card--browse reveal reveal--delay-1" href="index.html#new-and-hot" data-face-zone="eyes">
+              <div class="product-card__media">
+                <img src="assets/card-eyes.png" alt="" width="800" height="600" loading="lazy" />
+              </div>
+              <div class="product-card__body">
+                <span class="product-card__brand">Sephora</span>
+                <h3 class="product-card__title">Shop eye makeup</h3>
+                <p class="product-card__desc">Browse mascaras, liners, and palettes in New &amp; Hot.</p>
+                <div class="product-card__meta">
+                  <span class="product-card__price">Explore</span>
+                </div>
+              </div>
+            </a>
+
+            <a class="product-card reveal reveal--delay-2" href="products/fenty-gloss-bomb.html" data-face-zone="lips" data-brand="Fenty Beauty" data-subcategory="Lip gloss" data-price-value="39">
+              <div class="product-card__media">
+                <img src="assets/hot-picks/fenty-gloss-bomb.png" alt="Fenty Beauty Gloss Bomb Universal Lip Luminizer" width="600" height="600" loading="lazy" />
+              </div>
+              <div class="product-card__body">
+                <span class="product-card__brand">Fenty Beauty</span>
+                <h3 class="product-card__title">Gloss Bomb Universal Lip Luminizer</h3>
+                <p class="product-card__desc">Cult-favourite lip gloss with explosive shine in shades that flatter every skin tone.</p>
+                <div class="product-card__meta">
+                  <span class="product-card__price">$39.00</span>
+                  <span class="product-card__rating">★ 4.8</span>
+                </div>
+              </div>
+            </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="makeup-foundation-cta" id="foundation-help">
+        <p class="makeup-foundation-cta__text">Not sure what base products?</p>
+      </div>
+
+      <section class="makeup-shade-block" id="shade-finder" aria-labelledby="shade-finder-title">
+        <div class="container makeup-shade-block__head">
+          <h2 id="shade-finder-title">Find your shade</h2>
+          <p class="makeup-shade-block__sub">48 shade swatches</p>
+        </div>
+
+        <section class="x-atlas" aria-label="Foundation shade atlas">
+        <div class="container">
+          <div class="x-atlas__readout" data-atlas-readout>
+            <span class="x-atlas__readout-name" data-atlas-name>Hover to preview · tap to select</span>
+            <div class="x-atlas__readout-meta">
+              <span class="x-atlas__readout-code" data-atlas-code>–</span>
+              <span class="x-atlas__readout-und" data-atlas-und>–</span>
+            </div>
+          </div>
+
+          <div class="x-atlas__grid" data-atlas-grid role="list" aria-label="Foundation shade atlas">
+            <!-- 48 swatches generated inline; gradient porcelain → ebony -->
+            <button class="x-swatch" type="button" role="listitem" data-code="N°01" data-name="Porcelain"          data-und="Cool"    style="--c:#f6e4d2" aria-label="Shade 1 Porcelain, cool"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°02" data-name="Alabaster"         data-und="Neutral" style="--c:#f2dcc4" aria-label="Shade 2 Alabaster, neutral"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°03" data-name="Vanilla Cream"     data-und="Warm"    style="--c:#efd3b3" aria-label="Shade 3 Vanilla Cream, warm"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°04" data-name="Cashmere"          data-und="Cool"    style="--c:#ecccac" aria-label="Shade 4 Cashmere, cool"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°05" data-name="Linen"             data-und="Neutral" style="--c:#e8c4a1" aria-label="Shade 5 Linen, neutral"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°06" data-name="Buff"              data-und="Warm"    style="--c:#e6bd96" aria-label="Shade 6 Buff, warm"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°07" data-name="Soft Sand"         data-und="Cool"    style="--c:#e0b489" aria-label="Shade 7 Soft Sand, cool"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°08" data-name="Honeyed Beige"     data-und="Warm"    style="--c:#d9aa7e" aria-label="Shade 8 Honeyed Beige, warm"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°09" data-name="Praline"           data-und="Neutral" style="--c:#d2a073" aria-label="Shade 9 Praline, neutral"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°10" data-name="Toffee Light"      data-und="Warm"    style="--c:#cb966a" aria-label="Shade 10 Toffee Light, warm"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°11" data-name="Amber Sun"         data-und="Warm"    style="--c:#c48d63" aria-label="Shade 11 Amber Sun, warm"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°12" data-name="Caramel"           data-und="Neutral" style="--c:#bd855c" aria-label="Shade 12 Caramel, neutral"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°13" data-name="Tawny"             data-und="Warm"    style="--c:#b67d55" aria-label="Shade 13 Tawny, warm"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°14" data-name="Sienna"            data-und="Warm"    style="--c:#ae744d" aria-label="Shade 14 Sienna, warm"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°15" data-name="Chestnut Light"    data-und="Neutral" style="--c:#a66c48" aria-label="Shade 15 Chestnut Light, neutral"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°16" data-name="Cinnamon"          data-und="Warm"    style="--c:#9e6442" aria-label="Shade 16 Cinnamon, warm"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°17" data-name="Spiced Honey"      data-und="Warm"    style="--c:#965d3d" aria-label="Shade 17 Spiced Honey, warm"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°18" data-name="Maple"             data-und="Cool"    style="--c:#8e5638" aria-label="Shade 18 Maple, cool"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°19" data-name="Mahogany"          data-und="Neutral" style="--c:#864f34" aria-label="Shade 19 Mahogany, neutral"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°20" data-name="Russet"            data-und="Warm"    style="--c:#7f4930" aria-label="Shade 20 Russet, warm"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°21" data-name="Walnut"            data-und="Neutral" style="--c:#78442d" aria-label="Shade 21 Walnut, neutral"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°22" data-name="Cocoa"             data-und="Warm"    style="--c:#713e29" aria-label="Shade 22 Cocoa, warm"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°23" data-name="Pecan"             data-und="Cool"    style="--c:#6a3925" aria-label="Shade 23 Pecan, cool"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°24" data-name="Hazelnut"          data-und="Warm"    style="--c:#633421" aria-label="Shade 24 Hazelnut, warm"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°25" data-name="Espresso Light"    data-und="Neutral" style="--c:#5d301e" aria-label="Shade 25 Espresso Light, neutral"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°26" data-name="Bourbon"           data-und="Warm"    style="--c:#572c1b" aria-label="Shade 26 Bourbon, warm"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°27" data-name="Mocha"             data-und="Cool"    style="--c:#522919" aria-label="Shade 27 Mocha, cool"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°28" data-name="Truffle"           data-und="Neutral" style="--c:#4d2617" aria-label="Shade 28 Truffle, neutral"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°29" data-name="Velvet Brown"      data-und="Warm"    style="--c:#482315" aria-label="Shade 29 Velvet Brown, warm"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°30" data-name="Coffee"            data-und="Cool"    style="--c:#432013" aria-label="Shade 30 Coffee, cool"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°31" data-name="Dark Honey"        data-und="Warm"    style="--c:#3f1e12" aria-label="Shade 31 Dark Honey, warm"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°32" data-name="Espresso Deep"     data-und="Neutral" style="--c:#3b1c11" aria-label="Shade 32 Espresso Deep, neutral"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°33" data-name="Cacao"             data-und="Cool"    style="--c:#371a10" aria-label="Shade 33 Cacao, cool"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°34" data-name="Ganache"           data-und="Warm"    style="--c:#33180f" aria-label="Shade 34 Ganache, warm"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°35" data-name="Black Walnut"      data-und="Cool"    style="--c:#2f160e" aria-label="Shade 35 Black Walnut, cool"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°36" data-name="Onyx Warm"         data-und="Warm"    style="--c:#2b140d" aria-label="Shade 36 Onyx Warm, warm"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°37" data-name="Onyx Neutral"      data-und="Neutral" style="--c:#28130c" aria-label="Shade 37 Onyx Neutral, neutral"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°38" data-name="Onyx Cool"         data-und="Cool"    style="--c:#25110b" aria-label="Shade 38 Onyx Cool, cool"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°39" data-name="Ink"               data-und="Neutral" style="--c:#22100a" aria-label="Shade 39 Ink, neutral"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°40" data-name="Obsidian"          data-und="Cool"    style="--c:#1f0f09" aria-label="Shade 40 Obsidian, cool"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°41" data-name="Midnight Brown"    data-und="Warm"    style="--c:#1c0e08" aria-label="Shade 41 Midnight Brown, warm"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°42" data-name="Velvet Night"      data-und="Cool"    style="--c:#190d07" aria-label="Shade 42 Velvet Night, cool"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°43" data-name="Jet"               data-und="Neutral" style="--c:#170c07" aria-label="Shade 43 Jet, neutral"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°44" data-name="Volcano"           data-und="Warm"    style="--c:#150b06" aria-label="Shade 44 Volcano, warm"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°45" data-name="Eclipse"           data-und="Cool"    style="--c:#130a05" aria-label="Shade 45 Eclipse, cool"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°46" data-name="Ebony Soft"        data-und="Neutral" style="--c:#110905" aria-label="Shade 46 Ebony Soft, neutral"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°47" data-name="Ebony Deep"        data-und="Warm"    style="--c:#0f0804" aria-label="Shade 47 Ebony Deep, warm"></button>
+            <button class="x-swatch" type="button" role="listitem" data-code="N°48" data-name="The Last Word"     data-und="Cool"    style="--c:#0a0604" aria-label="Shade 48 The Last Word, cool"></button>
+          </div>
+
+          <div class="makeup-shade-block__explain reveal">
+            <p class="makeup-shade-block__explain-lead">Your starting point for base makeup</p>
+            <p>
+              These swatches are built for your complexion essentials; foundation, concealer, setting powder, and primer.
+              Tap on a swatch to then view the products that will suit your specific shade.
+            </p>
+            <p>
+              Each shade is labelled cool, warm, or neutral so you can narrow options faster, compare formulas with
+              confidence, and build a base routine that looks seamless in natural light.
+            </p>
+          </div>
+
+        </div>
+        </section>
+      </section>
+
+    </main>
+
+    <footer class="footer surface-ivory">
+      <div class="container footer__inner">
+        <div class="footer__brand"><img src="Logo.svg" alt="Sephora" class="footer__brand-img" /></div>
+        <div class="footer__meta">
+          <span>Free shipping on orders $100+</span>
+          <span>Beauty Insider rewards</span>
+          <span>&copy; 2026 Sephora USA, Inc.</span>
+        </div>
+      </div>
+    </footer>
+    <script src="scripts/main.js" defer></script>
+    <script src="scripts/makeup-scroll-reveal.js" defer></script>
+    <script src="scripts/makeup-shop-zones.js" defer></script>
+    <script src="scripts/shade-atlas.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sephora Collection Launch | Sephora</title>
+    <meta
+      name="description"
+      content="Discover Sephora Collection's new launch line: five complexion essentials made from empties returned through our Beauty Pass × TerraCycle programme."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,300;0,400;0,500;1,300;1,400&family=Open+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/components.css" />
+  </head>
+  <body class="page-launch">
+    <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress__bar" data-scroll-progress></span></div>
+    <div class="cursor-ring" data-cursor aria-hidden="true"></div>
+
+    <header class="site-header site-header--shop" data-site-header>
+      <div class="site-header__bar">
+        <div class="site-header__start">
+          <button
+            type="button"
+            class="site-header__menu"
+            data-menu-toggle
+            aria-expanded="false"
+            aria-controls="overlay-menu"
+            aria-label="Open menu"
+          >
+            <img src="mark.svg" alt="" class="site-header__mark" width="22" height="22" decoding="async" aria-hidden="true" />
+          </button>
+        </div>
+        <a class="site-header__logo" href="index.html" aria-label="Sephora home">
+          <img src="Logo.svg" alt="" width="132" height="11" decoding="async" />
+        </a>
+        <div class="site-header__end" aria-hidden="true"></div>
+      </div>
+    </header>
+
+    <aside class="overlay-menu" id="overlay-menu" data-overlay-menu aria-label="Full screen menu" aria-hidden="true">
+      <div class="overlay-menu__bg" data-close-menu></div>
+      <div class="overlay-menu__inner container">
+        <div class="overlay-menu__top">
+          <button type="button" class="site-header__menu is-active" data-menu-toggle aria-label="Close menu">
+            <img src="mark.svg" alt="" class="site-header__mark" width="22" height="22" aria-hidden="true" />
+            <span class="site-header__menu-label">Close</span>
+          </button>
+        </div>
+        <nav class="overlay-menu__nav" aria-label="Primary overlay navigation">
+          <a href="index.html">Home</a>
+          <a href="category-makeup.html">Makeup</a>
+          <a href="category-skincare.html">Skincare</a>
+          <a href="category-hair.html">Hair</a>
+          <a href="category-tools.html">Tools</a>
+          <a href="category-fragrance.html">Fragrance</a>
+        </nav>
+        <div class="overlay-menu__foot">
+          <span>We belong to something beautiful</span>
+        </div>
+      </div>
+    </aside>
+
+    <main>
+      <section class="hero launch-hero" aria-labelledby="launch-hero-title">
+        <div class="hero__media" aria-hidden="true">
+          <img
+            src="assets/launch-hero.png"
+            alt="Sephora Collection launch products on a red backdrop with dramatic horizontal shadows"
+            width="1024"
+            height="512"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </div>
+        <div class="container hero__content">
+          <h1 class="hero__lede" id="launch-hero-title">
+            <span class="hero__lede-line mask reveal reveal--delay-1"><span>Beauty</span></span>
+            <span class="hero__lede-line hero__lede-line--accent mask reveal reveal--delay-2"><span><em>redefined.</em></span></span>
+          </h1>
+          <p class="hero__sub reveal reveal--delay-3">Beauty has evolved, so have we. Explore our new collection.</p>
+          <div class="hero__actions reveal reveal--delay-4">
+            <a class="btn btn--accent" href="#launch-products">Shop the Collection <span class="arrow" aria-hidden="true"></span></a>
+          </div>
+        </div>
+      </section>
+
+      <section class="launch-snapshot" aria-labelledby="launch-snapshot-title">
+        <div class="container launch-snapshot__inner">
+          <p class="launch-snapshot__kicker reveal">Snapshot</p>
+          <h2 id="launch-snapshot-title" class="reveal reveal--delay-1">Rebrand + New Collection</h2>
+          <p class="reveal reveal--delay-2">
+            This rebrand introduces a cleaner visual identity and a focused five product lineup built for a complete
+            complexion and lip routine. The collection pairs formulas that respect your skin with editorial colour, so customers can
+            create polished daily looks or dial up to statement makeup with the same core products.
+          </p>
+          <p class="reveal reveal--delay-3">
+            Every formula in the launch is designed to layer seamlessly: foundation and concealer for base, cream
+            contour and blush for dimension, then liquid lipstick to finish with long wear colour.
+          </p>
+          <ul class="launch-snapshot__stats" aria-label="Collection highlights">
+            <li class="reveal reveal--delay-1"><span class="launch-snapshot__stat-value">5</span><span class="launch-snapshot__stat-label">Launch essentials</span></li>
+            <li class="reveal reveal--delay-2"><span class="launch-snapshot__stat-value">48</span><span class="launch-snapshot__stat-label">Foundation shades</span></li>
+            <li class="reveal reveal--delay-3"><span class="launch-snapshot__stat-value">12hr</span><span class="launch-snapshot__stat-label">Long wear finish</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="launch-recycle surface-ivory" aria-labelledby="launch-recycle-title">
+        <div class="container launch-recycle__inner">
+          <p class="launch-recycle__kicker reveal">Beauty Pass × TerraCycle</p>
+          <h2 id="launch-recycle-title" class="reveal reveal--delay-1">Made from empties you returned</h2>
+          <p class="launch-recycle__lead reveal reveal--delay-2">
+            This collection was born from the Sephora × TerraCycle programme. The empty products customers brought
+            back in store were recycled and remade into the formulas and packaging you see in this launch.
+          </p>
+          <div class="launch-recycle__story">
+            <article class="launch-recycle__chapter reveal">
+              <h3>Beauty recycled</h3>
+              <p>
+                Through TerraCycle bins in our stores, Beauty Pass members returned clean, empty packaging from across
+                the beauty aisle, including bottles, compacts, tubes, and caps that are usually hard to recycle at home.
+              </p>
+            </article>
+            <article class="launch-recycle__chapter reveal reveal--delay-1">
+              <h3>Beauty redeemed</h3>
+              <p>
+                Those returns were sorted, processed, and recovered. Plastic, glass, and metal were reclaimed from
+                the empties you dropped off, and every eligible return earned Beauty Pass points along the way.
+              </p>
+            </article>
+            <article class="launch-recycle__chapter reveal reveal--delay-2">
+              <h3>Beauty made new</h3>
+              <p>
+                That recovered material helped shape this five product line: new Sephora Collection formulas and
+                frosted glass packaging, designed as a complete complexion and lip routine built from what came back.
+              </p>
+            </article>
+          </div>
+          <p class="launch-recycle__foot reveal reveal--delay-3">
+            <a class="btn btn--accent" href="index.html#recycle">Recycle &amp; earn with TerraCycle <span class="arrow" aria-hidden="true"></span></a>
+          </p>
+        </div>
+      </section>
+
+      <section class="launch-routine" aria-labelledby="launch-routine-title">
+        <div class="container launch-routine__inner">
+          <p class="launch-routine__kicker reveal">The Routine</p>
+          <h2 id="launch-routine-title" class="reveal reveal--delay-1">Layer in five steps</h2>
+          <ol class="launch-routine__steps">
+            <li class="launch-routine__step reveal reveal--delay-1">
+              <span class="launch-routine__step-num">01</span>
+              <div>
+                <h3>Silk Veil Foundation</h3>
+                <p>Even out skin with a medium coverage satin finish.</p>
+              </div>
+            </li>
+            <li class="launch-routine__step reveal reveal--delay-2">
+              <span class="launch-routine__step-num">02</span>
+              <div>
+                <h3>Soft Blur Concealer</h3>
+                <p>Brighten and perfect where you need extra coverage.</p>
+              </div>
+            </li>
+            <li class="launch-routine__step reveal reveal--delay-3">
+              <span class="launch-routine__step-num">03</span>
+              <div>
+                <h3>Sculpt Cream Contour</h3>
+                <p>Add soft dimension along cheekbones and jawline.</p>
+              </div>
+            </li>
+            <li class="launch-routine__step reveal reveal--delay-4">
+              <span class="launch-routine__step-num">04</span>
+              <div>
+                <h3>Velvet Rose Blush</h3>
+                <p>Flush cheeks with buildable colour that melts into skin.</p>
+              </div>
+            </li>
+            <li class="launch-routine__step reveal reveal--delay-4">
+              <span class="launch-routine__step-num">05</span>
+              <div>
+                <h3>Satin Liquid Lipstick</h3>
+                <p>Finish with polished, long wear lip colour.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="launch-products" id="launch-products" aria-labelledby="launch-products-title">
+        <div class="container">
+          <h2 id="launch-products-title" class="reveal">The Five Launch Products</h2>
+          <div class="launch-products__grid">
+            <a class="launch-product-card reveal" href="products/soft-focus-foundation.html">
+              <div class="launch-product-card__media">
+                <span class="launch-product-card__badge">New</span>
+                <img src="assets/launch-products/foundation.png" alt="Silk Veil Foundation" width="1103" height="1426" loading="lazy" />
+              </div>
+              <div class="launch-product-card__body">
+                <span class="launch-product-card__brand">Sephora Collection</span>
+                <h3 class="launch-product-card__title">Silk Veil Foundation</h3>
+                <p class="launch-product-card__desc">Medium coverage satin finish that blurs texture without masking skin. 48 shades.</p>
+                <div class="launch-product-card__meta">
+                  <span class="launch-product-card__price">$34.00</span>
+                  <span class="launch-product-card__rating">★ 4.7</span>
+                </div>
+              </div>
+            </a>
+
+            <a class="launch-product-card reveal reveal--delay-1" href="products/precision-concealer.html">
+              <div class="launch-product-card__media">
+                <span class="launch-product-card__badge">New</span>
+                <img src="assets/launch-products/concealer.png" alt="Soft Blur Concealer" width="1103" height="1426" loading="lazy" />
+              </div>
+              <div class="launch-product-card__body">
+                <span class="launch-product-card__brand">Sephora Collection</span>
+                <h3 class="launch-product-card__title">Soft Blur Concealer</h3>
+                <p class="launch-product-card__desc">High pigment coverage that brightens dark circles and stays comfortable all day.</p>
+                <div class="launch-product-card__meta">
+                  <span class="launch-product-card__price">$22.00</span>
+                  <span class="launch-product-card__rating">★ 4.6</span>
+                </div>
+              </div>
+            </a>
+
+            <a class="launch-product-card reveal reveal--delay-2" href="products/rare-beauty-soft-pinch-contour.html">
+              <div class="launch-product-card__media">
+                <span class="launch-product-card__badge">New</span>
+                <img src="assets/launch-products/cream-contour.png" alt="Sculpt Cream Contour" width="1103" height="1426" loading="lazy" />
+              </div>
+              <div class="launch-product-card__body">
+                <span class="launch-product-card__brand">Sephora Collection</span>
+                <h3 class="launch-product-card__title">Sculpt Cream Contour</h3>
+                <p class="launch-product-card__desc">Blendable cream formula for soft, sculpted dimension with a natural finish.</p>
+                <div class="launch-product-card__meta">
+                  <span class="launch-product-card__price">$24.00</span>
+                  <span class="launch-product-card__rating">★ 4.6</span>
+                </div>
+              </div>
+            </a>
+
+            <a class="launch-product-card reveal reveal--delay-3" href="products/velvet-matte-blush.html">
+              <div class="launch-product-card__media">
+                <span class="launch-product-card__badge">New</span>
+                <img src="assets/launch-products/blush.png" alt="Velvet Rose Blush" width="1103" height="1426" loading="lazy" />
+              </div>
+              <div class="launch-product-card__body">
+                <span class="launch-product-card__brand">Sephora Collection</span>
+                <h3 class="launch-product-card__title">Velvet Rose Blush</h3>
+                <p class="launch-product-card__desc">Finely milled powder with a soft matte finish that melts in without patchiness.</p>
+                <div class="launch-product-card__meta">
+                  <span class="launch-product-card__price">$18.00</span>
+                  <span class="launch-product-card__rating">★ 4.5</span>
+                </div>
+              </div>
+            </a>
+
+            <a class="launch-product-card reveal reveal--delay-4" href="products/dewy-lip-cheek-tint.html">
+              <div class="launch-product-card__media">
+                <span class="launch-product-card__badge">New</span>
+                <img src="assets/launch-products/liquid-lipstick.png" alt="Satin Liquid Lipstick" width="1103" height="1426" loading="lazy" />
+              </div>
+              <div class="launch-product-card__body">
+                <span class="launch-product-card__brand">Sephora Collection</span>
+                <h3 class="launch-product-card__title">Satin Liquid Lipstick</h3>
+                <p class="launch-product-card__desc">Weightless satin colour with long wear comfort and a polished, luminous finish.</p>
+                <div class="launch-product-card__meta">
+                  <span class="launch-product-card__price">$16.00</span>
+                  <span class="launch-product-card__rating">★ 4.9</span>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="launch-cta" aria-labelledby="launch-cta-title">
+        <div class="container launch-cta__inner">
+          <p class="launch-cta__kicker reveal">Now at Sephora</p>
+          <h2 id="launch-cta-title" class="reveal reveal--delay-1">Ready to build your routine?</h2>
+          <p class="launch-cta__copy reveal reveal--delay-2">
+            Shop the full Sephora Collection launch online or in store. Free shipping on orders $100+.
+          </p>
+          <div class="launch-cta__actions reveal reveal--delay-3">
+            <a class="btn btn--accent" href="category-makeup.html">Explore all Makeup <span class="arrow" aria-hidden="true"></span></a>
+            <a class="btn" href="index.html">Back to Home</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer surface-ivory">
+      <div class="container footer__inner">
+        <div class="footer__brand"><img src="Logo.svg" alt="Sephora" class="footer__brand-img" /></div>
+        <div class="footer__meta">
+          <span>Free shipping on orders $100+</span>
+          <span>Beauty Insider rewards</span>
+          <span>&copy; 2026 Sephora USA, Inc.</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="scripts/main.js" defer></script>
+  </body>
+</html>
